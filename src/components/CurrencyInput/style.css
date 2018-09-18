@@ -1,0 +1,25 @@
+
+.inputNumber {
+    font-size: 26px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: white;
+    color: white;
+    text-align: right;
+    margin-top: -2px;
+}
+
+.inputNumber::placeholder{
+    color: white;
+}
+
+.inputNumber:focus {
+    outline: none;
+}
+
+.inputNumber::-webkit-inner-spin-button, 
+.inputNumber::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

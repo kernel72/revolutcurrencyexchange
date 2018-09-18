@@ -1,0 +1,27 @@
+{
+  "name": "revolutcurrencyexchange",
+  "version": "1.0.0",
+  "description": "Test task from Revolut",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html"
+  },
+  "author": "kernel72",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "parcel-bundler": "^1.9.7",
+    "postcss-modules": "^1.3.2"
+  },
+  "dependencies": {
+    "ap": "^0.2.0",
+    "mobx": "^5.1.1",
+    "mobx-react": "^5.2.8",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "recompose": "^0.30.0"
+  }
+}
