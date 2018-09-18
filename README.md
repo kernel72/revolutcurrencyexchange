@@ -15,6 +15,6 @@ or using Docker
 ```bash
     docker build -t revolut-currency-exchange ./
     docker run --rm -itd -p 8080:1234 revolut-currency-exchange
-    open http://localhost:1234
+    open http://localhost:8080
 ```
 
