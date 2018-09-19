@@ -17,9 +17,3 @@
 .inputNumber:focus {
     outline: none;
 }
-
-.inputNumber::-webkit-inner-spin-button, 
-.inputNumber::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
