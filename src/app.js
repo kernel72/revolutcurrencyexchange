@@ -7,6 +7,7 @@ import style from './app.css'
 
 import { Converter } from './core/Converter'
 import { RatesStorage } from './core/RatesStorage'
+import { Wallets } from './core/Wallets'
 
 import {CurrenciesForm} from './components/CurrenciesForm'
 
@@ -17,6 +18,11 @@ const coverter = new Converter(
         usdFeedUrl: 'http://www.floatrates.com/daily/usd.json',
         eurFeedUrl: 'http://www.floatrates.com/daily/eur.json',
         gbpFeedUrl: 'http://www.floatrates.com/daily/gbp.json'
+    }),
+    new Wallets({
+        USD: 1000,
+        EUR: 3000,
+        GBP: 500
     })
 );
 

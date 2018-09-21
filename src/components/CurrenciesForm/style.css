@@ -2,3 +2,7 @@
 .darker {
     background-color: #0153BB !important;
 }
+
+.transferButtonWrapper{
+    border-top: 1px solid white;
+}

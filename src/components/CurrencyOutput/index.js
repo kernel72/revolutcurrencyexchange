@@ -4,7 +4,7 @@ import { compose, withHandlers, mapProps } from 'recompose'
 
 const CurrencyOutputWidget = ({value, formatter}) => (
     <div>
-        <span>{ formatter(value) }</span>
+        <span>{ value > 0 ? `+${formatter(value)}` : 0 }</span>
     </div>
 )
 

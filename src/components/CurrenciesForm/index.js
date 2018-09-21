@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react'
 import { CurrencySelector } from '../CurrencySelector'
 import { CurrencyInput } from '../CurrencyInput'
 import { CurrencyOuput } from '../CurrencyOutput'
+import { TransferButton } from '../TransferButton' 
 
 import {withLoading} from '../LoadingRates'
 
@@ -32,6 +33,9 @@ export const CurrenciesForm = compose(
                             updateCurrencyHandler={Converter.setToCurrency}>
                 <CurrencyOuput/>
             </CurrencySelector>
+            <div className={style.transferButtonWrapper}>
+                <TransferButton/>
+            </div>
         </div>
     )
 )

@@ -1,0 +1,17 @@
+.transferButton {
+    width: 100%;
+    font-size: 18px;
+    background: transparent;
+    border: none;
+    padding-bottom: 10px;
+}
+
+.disabled {
+    color: lightgrey;
+    cursor: not-allowed;
+}
+
+.enabled {
+    color: white;
+    cursor: pointer;
+}

@@ -3,8 +3,9 @@ import {decorate, computed, observable, action, runInAction, reaction} from 'mob
 export const Converter = decorate(
     class Converter {
 
-        constructor(RatesStorage){
-            this.__ratesStorage = RatesStorage;
+        constructor(RatesStorageInstance, WalletsInstance){
+            this.__ratesStorage = RatesStorageInstance;
+            this.__wallets = WalletsInstance;
 
             this.__reaction = reaction(
                 () => this.__ratesStorage.availableCurrencies,
@@ -24,10 +25,15 @@ export const Converter = decorate(
             )
 
             runInAction(() => {
+                this.inputFromValue = '';
                 this.fromValue = 0;
                 this.fromCurrency = '';
                 this.toCurrency = '';
             });
+        }
+
+        get availableFunds(){
+            return this.__wallets.wallet
         }
 
         get isReady(){
@@ -51,11 +57,56 @@ export const Converter = decorate(
         }
 
         get toValue(){
-            return this.fromValue * this.rate;
+            return Number((this.fromValue * this.rate).toFixed(2));
+        }
+
+        get isEnoughFunds(){
+            return this.availableFunds[this.fromCurrency] >= this.fromValue;
+        }
+
+        get isTransferPossible(){
+            return (
+                this.isReady &&
+                this.isEnoughFunds &&
+                this.fromCurrency !== this.toCurrency &&
+                this.fromValue > 0
+            )
+        }
+
+        transfer(){
+            if(!this.isTransferPossible){
+                console.error("Transfer is not possible.");
+                return;
+            }
+
+            const isSuccess = this.__wallets.doTransfer({
+                fromWallet: this.fromCurrency,
+                fromValue: this.fromValue,
+                toWallet: this.toCurrency,
+                toValue: this.toValue
+            });
+
+            if(isSuccess){
+                this.setFromValue(0);
+            }
         }
 
         setFromValue(value){
-            this.fromValue = value;
+            value = String(value);
+            if(value != '0') {
+                value = value.startsWith('-') ? value : `-${value}`
+                value = value === '-' ? '': value;
+                value = value.length > 8 ? value.slice(0, 8) : value;
+            }
+            
+            this.inputFromValue = value;
+
+            const realVal = Number(value.slice(1, value.length));
+            if(isNaN(realVal)){
+                return;
+            }
+
+            this.fromValue = Number(realVal.toFixed(2));
         }
 
         setFromCurrency(value){
@@ -68,12 +119,18 @@ export const Converter = decorate(
 
     },{
         fromValue: observable,
+        inputFromValue: observable,
         toCurrency: observable,
         fromCurrency: observable,
         rate: computed,
         toValue: computed,
         setFromValue: action.bound,
         setFromCurrency:action.bound,
-        setToCurrency: action.bound
+        setToCurrency: action.bound,
+        availableFunds: computed,
+        isEnoughFunds: computed,
+        isTransferPossible: computed,
+        transfer: action
+
     }
 )
